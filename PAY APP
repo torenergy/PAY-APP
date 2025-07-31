@@ -5,18 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/api/payment', async (req, res) => {
-  try {
-    const { amount, currency, paymentMethodId } = req.body;
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency,
-      payment_method: paymentMethodId,
-      confirmation_method: 'manual',
-      confirm: true,
-    });
-    res.status(200).json({ success: true, paymentIntent });
-  } catch (error) {
+
     res.status(500).json({ error: error.message });
   }
 });
